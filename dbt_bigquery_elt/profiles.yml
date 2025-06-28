@@ -1,0 +1,23 @@
+dbt_bigquery_elt:
+  outputs:
+    dev:
+      dataset: the_information_lab_dataset
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: EU
+      method: oauth
+      priority: interactive
+      project: data-the-information-lab
+      threads: 4
+      type: bigquery
+    prod:
+      dataset: the_information_lab_dataset
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: EU
+      method: service_account
+      priority: interactive
+      project: data-the-information-lab
+      threads: 4
+      type: bigquery
+  target: dev
