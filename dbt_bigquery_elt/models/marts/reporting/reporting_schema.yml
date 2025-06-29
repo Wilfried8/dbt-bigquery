@@ -1,0 +1,151 @@
+version: 2
+
+models:
+
+  - name: reporting_revenue_by_day
+    description: >
+      Daily aggregation of sales, order volume
+      and average discounts, by product category and customer status.
+
+    columns:
+      - name: order_date
+        data_tests:
+          - not_null
+      - name: total_revenue
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+      - name: total_quantity
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+      - name: nb_orders
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+      - name: avg_discount
+
+  - name: reporting_top_customers
+    description: >
+      Ranking of the top 100 customers by total sales,
+      with their status, activity and last purchase.
+
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: full_name
+        data_tests:
+          - not_null
+
+      - name: total_revenue
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: nb_orders
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: last_order_date
+        data_tests:
+          - not_null
+
+      - name: is_active
+        data_tests:
+          - not_null
+
+  - name: reporting_product_performance
+    description: >
+        Product performance including quantity sold, revenue, and average discounts.
+    columns:
+      - name: product_name
+        data_tests:
+          - not_null
+
+      - name: category_id
+        data_tests:
+          - not_null
+
+      - name: model_year
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 2000"
+
+      - name: list_price
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: total_quantity
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: total_revenue
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: avg_discount
+
+      - name: revenue_per_unit
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+  - name: reporting_detailed_sales
+    description: >
+      Enriched sales line detail with customer and product name,
+      for dashboard display.
+
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+
+      - name: item_id
+        data_tests:
+          - not_null
+
+      - name: order_date
+        data_tests:
+          - not_null
+
+      - name: customer_name
+        data_tests:
+          - not_null
+
+      - name: product_name
+        data_tests:
+          - not_null
+
+      - name: category_id
+        data_tests:
+          - not_null
+
+      - name: quantity
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: list_price
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
+
+      - name: discount
+        data_tests:
+          - dbt_utils.accepted_range:
+                min_value: 0
+                max_value: 1
+
+      - name: revenu
+        data_tests:
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"

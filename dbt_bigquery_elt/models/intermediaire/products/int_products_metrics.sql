@@ -4,7 +4,7 @@ with items as (
 aggregated as (
     select
         product_id,
-        count(distinct order_id) as total_orders,
+        count(distinct order_id) as nb_orders,
         sum(quantity) as total_quantity,
         sum(revenu) as total_revenue,
         avg(discount) as avg_discount
