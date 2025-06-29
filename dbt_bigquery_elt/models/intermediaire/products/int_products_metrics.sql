@@ -1,6 +1,7 @@
 with items as (
     select * from {{ ref('stg_orders_items') }}
 ),
+
 aggregated as (
     select
         product_id,
@@ -11,4 +12,5 @@ aggregated as (
     from items
     group by product_id
 )
+
 select * from aggregated

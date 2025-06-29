@@ -1,0 +1,10 @@
+[sqlfluff]
+dialect = bigquery
+templater = dbt
+sql_file_exts = .sql,.sql.j2
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = .
+
+
