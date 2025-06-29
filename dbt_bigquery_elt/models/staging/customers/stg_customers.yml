@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "customers information from raw_customers source"
+    columns:
+        - name: customer_id
+          data_tests:
+            - not_null
+            - unique
+        - name: first_name
+        - name: last_name
+        - name: email
+          data_tests:
+            - not_null
+        - name: phone
+        - name: street
+        - name: city
+        - name: state
+        - name: city
+        - name: zip_code
+        - name: created_at

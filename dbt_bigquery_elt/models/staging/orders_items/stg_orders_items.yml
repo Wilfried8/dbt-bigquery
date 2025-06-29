@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_orders_items
+    description: "orders items information from raw_orders_orders source"
+    columns:
+        - name: order_id
+          data_tests:
+            - not_null
+            - relationships:
+                to: ref('stg_orders')
+                field: order_id
+        - name: product_id
+          data_tests:
+            - not_null
+            - relationships:
+                to: ref('stg_produtcs')
+                field: product_id
+
+        - name: item_id
+          data_tests:
+            - not_null
+        - name: quantity
+        - name: required_date
+        - name: list_price
+        - name: discount

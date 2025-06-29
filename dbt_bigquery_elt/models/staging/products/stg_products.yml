@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "orders items information from raw_orders_orders source"
+    columns:
+        - name: product_id
+          data_tests:
+            - not_null
+            - unique
+        - name: product_name
+        - name: brand_id
+        - name: category_id
+        - name: model_year
+        - name: list_price

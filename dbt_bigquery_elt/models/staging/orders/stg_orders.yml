@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "orders information from raw_orders source"
+    columns:
+        - name: order_id
+          data_tests:
+            - not_null
+            - unique
+        - name: customer_id
+          data_tests:
+            - not_null
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
+
+        - name: order_status
+        - name: order_date
+        - name: required_date
+        - name: shipped_date
+        - name: store_id
+        - name: staff_id
