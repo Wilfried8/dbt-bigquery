@@ -42,3 +42,9 @@ models:
     staging:
       +schema: staging
       +materialized: ephemeral
+    intermediaire:
+      +schema: intermediaire
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
